@@ -1,4 +1,4 @@
-# Integration in Microservice Oriented Landscape - Student Result System
+# Integration in Microservice Oriented Landscape
 
 ## Overview
 
