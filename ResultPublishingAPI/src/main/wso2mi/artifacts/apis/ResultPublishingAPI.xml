@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/resultPublish" name="ResultPublishingAPI" xmlns="http://ws.apache.org/ns/synapse">
+	<resource methods="POST" uri-template="/publish">
+		<inSequence>
+			<log category="INFO" level="full">
+			</log>
+			<property name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+			<property name="FORCE_SC_ACCEPTED" scope="axis2" type="STRING" value="true"/>
+			<call>
+			<endpoint key="ResultJMSQueueEp"/>
+			</call>
+		</inSequence>
+		<outSequence>
+		</outSequence>
+		<faultSequence>
+		</faultSequence>
+	</resource>
+</api>

@@ -1,0 +1,15 @@
+<datasource>
+  <name>ResultMySQLConnection</name>
+  <description>MySQL Connection</description>
+  <jndiConfig useDataSourceFactory="false">
+    <name>MysqlConJNDI1</name>
+  </jndiConfig>
+  <definition type="RDBMS">
+    <configuration>
+      <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+      <url>jdbc:mysql://localhost:3306/result</url>
+      <username>wso2</username>
+      <password>wso2con</password>
+    </configuration>
+  </definition>
+</datasource>

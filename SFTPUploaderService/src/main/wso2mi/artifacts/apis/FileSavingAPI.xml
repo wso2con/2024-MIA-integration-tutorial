@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/save_result" name="FileSavingAPI" xmlns="http://ws.apache.org/ns/synapse">
+	<resource methods="POST">
+		<inSequence>
+			<log category="INFO" level="full">
+			</log>
+			<sequence key="FileSavingSequence"/>
+			<respond/>
+		</inSequence>
+		<outSequence>
+		</outSequence>
+		<faultSequence>
+		</faultSequence>
+	</resource>
+</api>

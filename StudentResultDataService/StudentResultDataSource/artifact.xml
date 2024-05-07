@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="student" groupId="com.wso2.con.data.source.datasource" version="5.2.45" type="datasource/datasource" serverRole="DataServicesServer">
+        <file>datasource/student.xml</file>
+    </artifact>
+    <artifact name="result" groupId="com.wso2.con.data.source.datasource" version="5.2.45" type="datasource/datasource" serverRole="DataServicesServer">
+        <file>datasource/result.xml</file>
+    </artifact>
+</artifacts>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/result_email" name="SendResultEmail" xmlns="http://ws.apache.org/ns/synapse">
+	<resource methods="POST">
+		<inSequence>
+			<log category="INFO" level="full">
+			</log>
+			<clone continueParent="true" id="send_email">
+				<target>
+					<sequence>
+						<sequence key="EmailProcessingTemplateSequence"/>
+					</sequence>
+				</target>
+			</clone>
+			<respond/>
+		</inSequence>
+		<outSequence>
+		</outSequence>
+		<faultSequence>
+		</faultSequence>
+	</resource>
+</api>

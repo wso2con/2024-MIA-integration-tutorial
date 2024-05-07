@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="SFTP_LOCATION" xmlns="http://ws.apache.org/ns/synapse">
+	<file.init>
+        <connectionType>SFTP</connectionType>
+        <password>password</password>
+        <host>hostname</host>
+        <fileLockScheme>Local</fileLockScheme>
+        <port>22</port>
+        <name>SFTP_LOCATION</name>
+        <username>username</username>
+    </file.init>
+</localEntry>

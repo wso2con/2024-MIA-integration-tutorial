@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ResultProcessingSequence"  trace="disable"  xmlns="http://ws.apache.org/ns/synapse">
+	<log category="INFO" level="simple">
+		<property name="BODY" expression="$body"/>
+	</log>
+	<property name="student_id" scope="default" type="STRING" expression="//student_id/text()"/>
+	<property name="subject" scope="default" type="STRING" expression="//subject/text()"/>
+	<property name="uri.var.marks" scope="default" type="STRING" expression="//marks/text()"/>
+	<property name="semester" scope="default" type="STRING" expression="//semester/text()"/>
+	<call>
+		<endpoint key="MarksToGradeEp"/>
+	</call>
+	<log category="INFO" level="simple">
+		<property name="BODY_AFTER_MARKS_TO_GRADE" expression="$body"/>
+	</log>
+	<payloadFactory media-type="json" template-type="default">
+		<format>{
+			"_postupdate_results": {
+			"student_id" : $1,
+			"subject": "$2",
+			"marks" : $3,
+			"grade": "$4",
+			"semester": "$5"
+			}
+			}</format>
+		<args>
+            <arg evaluator="xml" expression="$ctx:student_id" xmlns:res="http://moe.com/xsd/Result/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+            <arg evaluator="xml" expression="$ctx:subject" xmlns:res="http://moe.com/xsd/Result/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+			<arg evaluator="xml" expression="$ctx:uri.var.marks" xmlns:res="http://moe.com/xsd/Result/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+            <arg evaluator="json" expression="$.grade" xmlns:res="http://moe.com/xsd/Result/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+            <arg evaluator="xml" expression="$ctx:semester" xmlns:res="http://moe.com/xsd/Result/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+		</args>
+	</payloadFactory>
+	<property name="ContentType" scope="axis2" type="STRING" value="application/json"/>
+	<property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+	<call>
+		<endpoint key="UpdateResultDSEp"/>
+	</call>
+</sequence>

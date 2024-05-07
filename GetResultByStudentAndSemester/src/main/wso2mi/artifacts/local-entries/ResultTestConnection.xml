@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <localEntry key="ResultTestConnection" xmlns="http://ws.apache.org/ns/synapse">
+        <kafkaTransport.init>
+  <connectionType>kafka</connectionType>
+  <name>ResultTestConnection</name>
+  <bootstrapServers>localhost:9092</bootstrapServers>
+  <keySerializerClass>org.apache.kafka.common.serialization.StringSerializer</keySerializerClass>
+  <valueSerializerClass>org.apache.kafka.common.serialization.StringSerializer</valueSerializerClass>
+  <acks>all</acks>
+  <timeout>8000</timeout>
+  <requestTimeout>10000</requestTimeout>
+  <metadataFetchTimeout>5000</metadataFetchTimeout>
+  <maxPoolSize>50</maxPoolSize>
+</kafkaTransport.init>
+    </localEntry>

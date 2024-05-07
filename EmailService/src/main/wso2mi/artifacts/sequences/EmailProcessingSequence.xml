@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="EmailProcessingSequence"  trace="disable"  xmlns="http://ws.apache.org/ns/synapse">
+	<log category="INFO" level="full">
+</log>
+	<property name="toAddress" scope="default" type="STRING" expression="//*[local-name() = 'email']"/>
+	<property name="semester" scope="default" type="STRING" expression="(//*[local-name() = 'semester'])[position()=1]/text()"/>
+	<property name="Subject" scope="transport" type="STRING" expression="fn:concat('Result Sheet for Semester ', $ctx:semester)"/>
+	<property name="ContentType" scope="axis2" type="STRING" value="text/html"/>
+	<property name="messageType" scope="axis2" type="STRING" value="text/html"/>
+	<property name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+	<property name="FORCE_SC_ACCEPTED" scope="axis2" type="STRING" value="true"/>
+	<property expression="fn:concat('mailto:',$ctx:toAddress)" name="emailEP" scope="default" type="STRING"/>
+	<header expression="get-property('emailEP')" name="To" scope="default"/>
+	<log>
+		<property name="toAddress" expression="$ctx:toAddress"/>
+		<property name="semester" expression="$ctx:semester"/>
+		<property name="Subject" expression="$ctx:Subject"/>
+		<property expression="$ctx:emailEP" name="emailEP"/>
+	</log>
+	<xslt key="gov:xslts&#x2F;result_email_template.xslt">
+	</xslt>
+	<call>
+		<endpoint>
+			<default>
+				<suspendOnFailure>
+					<initialDuration>-1</initialDuration>
+					<progressionFactor>1</progressionFactor>
+				</suspendOnFailure>
+				<markForSuspension>
+					<retriesBeforeSuspension>0</retriesBeforeSuspension>
+				</markForSuspension>
+			</default>
+		</endpoint>
+	</call>
+</sequence>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="FileSavingSequence"  trace="disable"  xmlns="http://ws.apache.org/ns/synapse">
+	<property name="first_name" scope="default" type="STRING" expression="//*[local-name() = 'first_name']"/>
+	<property name="file_path" scope="default" type="STRING" expression="fn:concat('/moe/results/', get-property('first_name'))"/>
+	<log category="INFO" level="simple">
+		<property name="file_path" expression="$ctx:file_path"/>
+		<property name="first_name" expression="$ctx:first_name"/>
+	</log>
+	<xslt key="gov:xslts&#x2F;result_file_template.xslt">
+	</xslt>
+	<clone continueParent="true" id="save_result">
+		<target>
+			<sequence>
+				<file.write configKey="SFTP_LOCATION">
+					<filePath>{$ctx:file_path}</filePath>
+					<contentOrExpression>{$ctx:body}</contentOrExpression>
+					<mimeType>text/plain</mimeType>
+					<writeMode>Overwrite</writeMode>
+					<compress>false</compress>
+					<appendNewLine>true</appendNewLine>
+					<enableStreaming>true</enableStreaming>
+					<enableLock>true</enableLock>
+					<updateLastModified>true</updateLastModified>
+					<includeResultTo>Message Body</includeResultTo>
+				</file.write>
+			</sequence>
+		</target>
+	</clone>
+</sequence>

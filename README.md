@@ -16,3 +16,27 @@ This tutorial will walk you through developing APIs and integrations with low-co
 - Latest version [Ballerina Swan Lake](https://ballerina.io/downloads/) 
 - WSO2 Integration Studio [8.2.0](https://wso2.com/micro-integrator/)
 - VS Code with Micro Integrator Extension
+
+For development of the artifacts following tools were used
+
+- Integration Studio version [8.2.0](https://wso2.com/micro-integrator/)
+- VS Code with Micro Integrator Extension
+
+For testing below tools will be needed. 
+
+- Postman (preferred) or curl
+- SoapUI
+- MySQL Workbench or any other database client
+- FileZilla
+
+A University is taking the first steps to transform their existing 'Result' issuing monolith system into a Microservices landscape. They have identified decentralised integration as a vital requirement to accomplish this task. 
+
+On a high-level University has decided to implement below two scenarios.
+
+1. Result Publishing System
+
+![Result Publishing System](images/ResultPublishingService.jpeg)
+
+2. Result Fetching and Notification System
+
+![Result Fetching System](images/ResultFetchingAndNotificationService.jpeg)

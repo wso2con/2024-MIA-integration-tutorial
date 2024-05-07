@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <localEntry key="SFTPLOCATION" xmlns="http://ws.apache.org/ns/synapse">
+        <file.init>
+  <connectionType>SFTP</connectionType>
+  <filePath>{$ctx:file_path}</filePath>
+  <contentOrExpression>{$ctx:body}</contentOrExpression>
+  <mimeType>text/plain</mimeType>
+  <writeMode>Overwrite</writeMode>
+  <compress>false</compress>
+  <appendNewLine>true</appendNewLine>
+  <enableStreaming>true</enableStreaming>
+  <enableLock>true</enableLock>
+  <updateLastModified>true</updateLastModified>
+  <includeResultTo>Message Body</includeResultTo>
+  <name>SFTPLOCATION</name>
+  <host>hostname</host>
+  <port>22</port>
+  <username>username</username>
+  <password>password</password>
+  <userDirIsRoot>false</userDirIsRoot>
+  <setAvoidPermission>true</setAvoidPermission>
+  <fileLockScheme>Local</fileLockScheme>
+</file.init>
+    </localEntry>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <api context="/getResult" name="GetResultByStudentAndSemester"  xmlns="http://ws.apache.org/ns/synapse">
+	<resource methods="GET" uri-template="/result/{student_id}/{semester}">
+		<inSequence>
+			<property name="uri.var.student_id" scope="default" type="STRING" expression="$ctx:uri.var.student_id"/>
+			<property name="uri.var.semester" scope="default" type="STRING" expression="$ctx:uri.var.semester"/>
+			<log category="INFO" level="simple">
+				<property name="student_id" expression="$ctx:uri.var.student_id"/>
+				<property name="semester" expression="$ctx:uri.var.semester"/>
+			</log>
+			<property name="result_info" scope="default" type="OM">
+				<StudentResultInfo></StudentResultInfo>
+			</property>
+			<clone id="student_result">
+				<target>
+					<sequence>
+						<call>
+							<endpoint key="GetResultDSEp"/>
+						</call>
+					</sequence>
+				</target>
+				<target>
+					<sequence>
+						<call>
+							<endpoint key="GetStudentDSEp"/>
+						</call>
+					</sequence>
+				</target>
+			</clone>
+			<aggregate id="student_result">
+				<completeCondition timeout="0">
+					<messageCount max="{-1}" min="{-1}"/>
+				</completeCondition>
+				<onComplete aggregateElementType="root" enclosingElementProperty="result_info" expression="$body/*[1]">
+					<log category="INFO" level="full">
+					</log>
+					<clone continueParent="true" id="async_publish">
+						<target>
+							<sequence>
+								<kafkaTransport.publishMessages configKey="ResultTestConnection">
+									<topic>result-test-topic</topic>
+								</kafkaTransport.publishMessages>
+								<log category="INFO" level="simple">
+									<property name="AFTER_PUBLISHING_INSIDE" value="DONE" />
+								</log>
+							</sequence>
+						</target>
+					</clone>
+					<log category="INFO" level="simple">
+						<property name="AFTER_PUBLISHING" value="DONE" />
+					</log>
+					<send>
+					</send>
+				</onComplete>
+			</aggregate>
+			<respond/>
+		</inSequence>
+		<outSequence>
+		</outSequence>
+		<faultSequence>
+		</faultSequence>
+	</resource>
+</api>

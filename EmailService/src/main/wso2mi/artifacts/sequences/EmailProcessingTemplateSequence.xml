@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="EmailProcessingTemplateSequence"  trace="disable"  xmlns="http://ws.apache.org/ns/synapse">
+	<property name="semester" scope="default" type="STRING" expression="(//*[local-name() = 'semester'])[position()=1]/text()"/>
+	<property name="subject" scope="default" type="STRING" expression="fn:concat('Result Sheet for Semester ', $ctx:semester)"/>
+	<property name="toAddress" scope="default" type="STRING" expression="//*[local-name() = 'email']"/>
+	<log>
+		<property name="toAddress" expression="$ctx:toAddress"/>
+		<property name="semester" expression="$ctx:semester"/>
+		<property name="subject" expression="$ctx:subject"/>
+	</log>
+	<xslt key="gov:xslts&#x2F;result_email_template.xslt">
+	</xslt>
+    <call-template target="SendEmailTemplate">
+		<with-param name="to_Address" value="{$ctx:toAddress}"/>
+		<with-param name="subject" value="{$ctx:subject}"/>
+		<with-param name="send_email" value="true"/>
+	</call-template>
+</sequence>
