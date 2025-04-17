@@ -26,3 +26,10 @@ desc Result;
 DROP DATABASE result;
 DROP DATABASE wso2con_demo;
 DROP DATABASE student;
+
+
+use wso2isdb;
+
+select * from UM_USER;
+
+select * from UM_USER_ATTRIBUTE;

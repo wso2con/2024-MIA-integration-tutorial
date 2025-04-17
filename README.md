@@ -2,7 +2,7 @@
 
 ## Overview
 
-Modern organizations often use Microservices Architecture to digitze their application landscape to take advantage of its cloud nativeness and faster go-to-market time due to decentralised nature. While employing this strategy, robust integration becomes vital. Thus it's advatagous for an integration platform to support lightweight runtimes with easier development of integration scenarios with low-code development tools. 
+Modern organizations often use Microservices Architecture to digitize their application landscape to take advantage of its cloud nativeness and faster go-to-market time due to decentralised nature. While employing this strategy, robust integration becomes vital. Thus it's advatagous for an integration platform to support lightweight runtimes with easier development of integration scenarios with low-code development tools. 
 
 This tutorial will walk you through developing APIs and integrations with low-code tools for WSO2 Micro Integrator and deployment in a distributed microservices landscape. 
 
@@ -28,6 +28,8 @@ For testing below tools will be needed.
 - SoapUI
 - MySQL Workbench or any other database client
 - FileZilla
+
+## Scenario
 
 A University is taking the first steps to transform their existing 'Result' issuing monolith system into a Microservices landscape. They have identified decentralised integration as a vital requirement to accomplish this task. 
 

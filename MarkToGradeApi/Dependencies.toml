@@ -10,7 +10,7 @@ distribution-version = "2201.9.0"
 [[package]]
 org = "ballerina"
 name = "auth"
-version = "2.11.0"
+version = "2.11.2"
 dependencies = [
 	{org = "ballerina", name = "crypto"},
 	{org = "ballerina", name = "jballerina.java"},
@@ -61,7 +61,7 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "http"
-version = "2.11.1"
+version = "2.11.6"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
@@ -93,7 +93,7 @@ modules = [
 [[package]]
 org = "ballerina"
 name = "io"
-version = "1.6.0"
+version = "1.6.1"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
@@ -295,6 +295,17 @@ dependencies = [
 ]
 
 [[package]]
+org = "ballerina"
+name = "uuid"
+version = "1.8.0"
+dependencies = [
+	{org = "ballerina", name = "crypto"},
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "lang.int"},
+	{org = "ballerina", name = "time"}
+]
+
+[[package]]
 org = "ballerinai"
 name = "observe"
 version = "0.0.0"
@@ -307,6 +318,25 @@ modules = [
 ]
 
 [[package]]
+org = "ballerinax"
+name = "wso2.controlplane"
+version = "1.0.0"
+dependencies = [
+	{org = "ballerina", name = "file"},
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "jwt"},
+	{org = "ballerina", name = "lang.array"},
+	{org = "ballerina", name = "lang.runtime"},
+	{org = "ballerina", name = "log"},
+	{org = "ballerina", name = "os"},
+	{org = "ballerina", name = "uuid"}
+]
+modules = [
+	{org = "ballerinax", packageName = "wso2.controlplane", moduleName = "wso2.controlplane"}
+]
+
+[[package]]
 org = "shazni"
 name = "MarkToGradeApi"
 version = "0.1.0"
@@ -314,7 +344,8 @@ dependencies = [
 	{org = "ballerina", name = "http"},
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "test"},
-	{org = "ballerinai", name = "observe"}
+	{org = "ballerinai", name = "observe"},
+	{org = "ballerinax", name = "wso2.controlplane"}
 ]
 modules = [
 	{org = "shazni", packageName = "MarkToGradeApi", moduleName = "MarkToGradeApi"}

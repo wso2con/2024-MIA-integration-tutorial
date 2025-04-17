@@ -1,5 +1,5 @@
 import ballerina/http;
-// import ballerinax/wso2.controlplane as _;
+import ballerinax/wso2.controlplane as _;
 
 function getGrade(int marks) returns string {
     if marks >= 80 {
