@@ -1,0 +1,62 @@
+<data name="StudentDataService" serviceNamespace="" serviceGroup="" transports="http https"
+	disableStreaming="true">
+	<description>Retrieve Student Information from the database as a service</description>
+	<config id="StudentDataSource">
+		<property name="carbon_datasource_name">StudentMySQLConnection</property>
+	</config>
+	<query id="GetAllStudents" useConfig="StudentDataSource">
+		<sql>SELECT
+			id, first_name, last_name, date_of_birth, address, degree, country, email FROM
+			student</sql>
+		<result element="students" rowName="student">
+			<element name="id" column="id" xsdType="string" exportType="Scalar" requiredRoles="" />
+			<element name="first_name" column="first_name" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="last_name" column="last_name" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="date_of_birth" column="date_of_birth" xsdType="string"
+				exportType="Scalar" requiredRoles="" />
+			<element name="address" column="address" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="degree" column="degree" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="country" requiredRoles="">
+
+				<element name="email" column="email" xsdType="string" exportType="Scalar"
+					requiredRoles="" />
+			</element>
+		</result>
+	</query>
+	<resource method="GET" path="/getAllStudents" disableStreaming="true">
+		<call-query href="GetAllStudents" />
+	</resource>
+	<query id="GetStudentbyId" useConfig="StudentDataSource">
+		<sql>SELECT
+			id,
+			first_name, last_name, date_of_birth, address, degree, country, email FROM
+			Student WHERE id = :id</sql>
+		<param name="id" paramType="SCALAR" sqlType="STRING" type="IN" />
+		<result element="students" rowName="student">
+			<element name="id" column="id" xsdType="string" exportType="Scalar" requiredRoles="" />
+			<element name="first_name" column="first_name" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="last_name" column="last_name" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="date_of_birth" column="date_of_birth" xsdType="string"
+				exportType="Scalar" requiredRoles="" />
+			<element name="address" column="address" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="degree" column="degree" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="country" column="country" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="email" column="email" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+		</result>
+	</query>
+	<resource method="GET" path="/getStudent" disableStreaming="true">
+		<call-query href="GetStudentbyId">
+			<with-param name="id" query-param="id" />
+		</call-query>
+	</resource>
+</data>

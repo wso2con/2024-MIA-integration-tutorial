@@ -1,0 +1,50 @@
+<data name="ResultDataService" serviceNamespace="" serviceGroup="" transports="http https"
+	disableStreaming="true">
+	<description>Update and Retrieve Results</description>
+	<config id="ResultDataSource">
+		<property name="carbon_datasource_name">ResultMySQLConnection</property>
+	</config>
+	<query id="GetResultByStudentIdAndSemester" useConfig="ResultDataSource">
+		<sql>SELECT id,
+			student_id, subject, marks, grade, semester FROM Result WHERE student_id =
+			:student_id and semester = :semester</sql>
+		<param name="student_id" paramType="SCALAR" sqlType="STRING" type="IN" />
+		<param name="semester" paramType="SCALAR" sqlType="STRING" type="IN" />
+		<result element="Result" rowName="subject_result">
+			<element name="student_id" column="student_id" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="subject" column="subject" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="marks" column="marks" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="grade" column="grade" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+			<element name="semester" column="semester" xsdType="string" exportType="Scalar"
+				requiredRoles="" />
+		</result>
+	</query>
+	<resource method="GET" path="/get_results">
+		<call-query href="GetResultByStudentIdAndSemester">
+			<with-param name="student_id" query-param="student_id" />
+			<with-param name="semester" query-param="semester" />
+		</call-query>
+	</resource>
+	<query id="UpdateResultQuery" useConfig="ResultDataSource">
+		<sql>INSERT INTO Result (student_id, subject, marks, grade, semester) VALUES (:student_id,
+			:subject, :marks, :grade, :semester)</sql>
+		<param name="student_id" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+		<param name="subject" paramType="SCALAR" sqlType="STRING" type="IN" />
+		<param name="marks" paramType="SCALAR" sqlType="INTEGER" type="IN" />
+		<param name="grade" paramType="SCALAR" sqlType="STRING" type="IN" />
+		<param name="semester" paramType="SCALAR" sqlType="STRING" type="IN" />
+	</query>
+	<resource method="POST" path="/update_results" disableStreaming="true">
+		<call-query href="UpdateResultQuery">
+			<with-param name="student_id" query-param="student_id" />
+			<with-param name="subject" query-param="subject" />
+			<with-param name="marks" query-param="marks" />
+			<with-param name="grade" query-param="grade" />
+			<with-param name="semester" query-param="semester" />
+		</call-query>
+	</resource>
+</data>

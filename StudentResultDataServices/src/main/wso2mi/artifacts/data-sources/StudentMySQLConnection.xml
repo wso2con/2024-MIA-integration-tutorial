@@ -1,0 +1,12 @@
+<datasource>
+	<name>StudentMySQLConnection</name>
+	<description>Student datasource</description>
+	<definition type="RDBMS">
+		<configuration>
+			<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+			<url>jdbc:mysql://localhost:3306/student</url>
+			<username>wso2</username>
+			<password>wso2con</password>
+		</configuration>
+	</definition>
+</datasource>
